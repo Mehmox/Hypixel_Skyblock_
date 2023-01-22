@@ -1,0 +1,274 @@
+#include <stdio.h>//soul eather dmgi ekrana yazabilir
+// Version 6.1
+int main(){
+    int Type,WeaponType;
+
+    float Catacomblvl,Class,Combatlvl,Bestiary;
+    float CatacombB=0,ArrowDmg,SouleatherD,SouleatherN,Legion,LegionP,Star,MasterSkull;
+    float CArrowD,CExtraAC,AttackSpeed;
+    float E1,E2,E3,E4,E5,Enchants,Overload;
+
+    float BlazePet,BlazePetB,BlazePetFmngB;
+    float EDragPet,EDragPetB,EDragPetS,EDragPetCC;
+    float GDragPet,GDragPetB,GDragPetS,GDragPetAS;
+
+    float Weapondmg,WeapondmgL;
+    float BaseStrg,Strg,StrgL;
+    float BaseCritdmg,Critdmg,CritdmgL;
+
+    float BlessingofDamagePercent,BlessingofDamageNumber;
+    float BlessingofPowerlvl,BlessingofPowerPercent,BlessingofPowerNumber;
+    float BlessingofStonelvl,BlessingofStoneDamage;
+    float BlessingofTimelvl,BlessingofTimePercent,BlessingMultiplictive;
+
+    float WeaponStrg,WeaponCritD;
+    float HelmetStrg,HelmetCritD;
+    float ChestPStrg,ChestPCritD;
+    float LeggingsStrg,LeggingsCritD;
+    float BootStrg,BootCritD;
+
+    float DmgMin,DmgMax,DPSMin,DPSMax;
+    int N=4,i=0,Button;
+    long long unsigned int X,S;
+//--------------------------------------------------------------------------------------------------------------------------------------------------------//
+// Type
+        Type=2;        //  1)Dungeon 2)World
+        WeaponType=1;  //  1)Bow     2)Mele
+//--------------------------------------------------------------------------------------------------------------------------------------------------------//
+// Base Skills
+        Combatlvl=43;  Catacomblvl=39;  Class=34;  MasterSkull=5;  Legion =7;  SouleatherN=6;//Soul eather nedense normal dünyada çalışmıyor ?????
+                                                                   LegionP=0;  SouleatherD=0;/*20000*/
+        BlessingofPowerlvl=0;  BlessingofStonelvl=0;  BlessingofTimelvl=0;  BlessingMultiplictive=10;
+//                        24                     9                     5
+//--------------------------------------------------------------------------------------------------------------------------------------------------------//
+{// Pets
+        BlazePet=1;  EDragPet=0;  GDragPet=0;}
+//--------------------------------------------------------------------------------------------------------------------------------------------------------//
+{// Base Stats
+if (Type==1){
+        BaseStrg=262.49;  BaseCritdmg=219.07;  AttackSpeed=50.85;  ArrowDmg=1;
+        BaseStrg+=20;     BaseCritdmg+=20;     Bestiary=9;  Star=50;}
+if (Type==2){
+        BaseStrg=279.49;  BaseCritdmg=259.07;  Bestiary=0;  AttackSpeed=50.85;  ArrowDmg=1;}}
+//--------------------------------------------------------------------------------------------------------------------------------------------------------//
+{// Enchants Dungeon
+        if (Type==1){
+        Overload=5;
+        E1=50;  //Power 6
+        E2=0;
+        E3=0;
+        E4=0;
+        E5=0;}}
+//--------------------------------------------------------------------------------------------------------------------------------------------------------//
+{// Enchants World
+        if (Type==2){
+        Overload=5;
+        E1=50;  //Power 6
+        E2=80;
+        E3=0;
+        E4=0;
+        E5=0;}}
+//--------------------------------------------------------------------------------------------------------------------------------------------------------//
+{// Prepare
+        if (BlazePet==1){BlazePetB=0.4;BlazePetFmngB=30;}
+        if (EDragPet==1){EDragPetB=0.1;EDragPetS=50;EDragPetCC=10;}
+        if (GDragPet==1){GDragPetB=2.5;GDragPetS=140;GDragPetAS=50;}
+        Combatlvl*=4;
+        while (Catacomblvl!=i){CatacombB+=N;i++;if (i%5==0 && i<35){N+=1;}if (i%5==0 && i>=35 && i<45){N+=2;}if (i==45){N+=2;}if (i>45){N+=1;}}
+        if (Class!=-1){CArrowD=1+(Class*0.8+140)/100;CExtraAC=1+(Class+100)/100;}
+        CatacombB=1+(CatacombB+Star)/100;
+        Legion=1+(Legion*LegionP*0.07)/100;
+        Overload=1+Overload/10;
+        AttackSpeed=(1+((AttackSpeed+GDragPetAS)*Legion*(1+EDragPetB))/100)*2;
+        SouleatherD*=SouleatherN;
+        Enchants=1+(E1+E2+E3+E4+E5+Combatlvl)/100;
+        MasterSkull=1+MasterSkull/100;
+        if (MasterSkull>1.04){MasterSkull+=0.01;}
+        if (MasterSkull>1.06){MasterSkull+=0.01;}
+        if (MasterSkull>1.08){MasterSkull+=0.01;}}
+//--------------------------------------------------------------------------------------------------------------------------------------------------------//
+{// GEAR Dungeon
+if(Type==1){
+// Weapon
+        Weapondmg=340+BlazePetFmngB;         WeaponStrg=98+BlazePetFmngB;         WeaponCritD=170;        
+// Helmet
+        HelmetStrg=(40+35+14)*(1+BlazePetB);       HelmetCritD=Catacomblvl*(1+BlazePetB);
+// ChestP
+        ChestPStrg=(40+35+24)*(1+BlazePetB);       ChestPCritD=Catacomblvl*(1+BlazePetB);
+// Leggings
+        LeggingsStrg=(40+35+24)*(1+BlazePetB);     LeggingsCritD=Catacomblvl*(1+BlazePetB);
+// Boots
+        BootStrg=(40+35+14)*(1+BlazePetB);         BootCritD=Catacomblvl*(1+BlazePetB);}}
+//--------------------------------------------------------------------------------------------------------------------------------------------------------//
+{// GEAR World
+if(Type==2){
+// Weapon
+        Weapondmg=371+BlazePetFmngB;         WeaponStrg=102+BlazePetFmngB;         WeaponCritD=181;
+// Helmet   
+        HelmetStrg=(44+35+14)*(1+BlazePetB);       HelmetCritD=Catacomblvl*(1+BlazePetB);
+// ChestP
+        ChestPStrg=(44+35+24)*(1+BlazePetB);       ChestPCritD=Catacomblvl*(1+BlazePetB);
+// Leggings
+        LeggingsStrg=(44+35+24)*(1+BlazePetB);     LeggingsCritD=Catacomblvl*(1+BlazePetB);
+// Boots
+        BootStrg=(59);         BootCritD=Catacomblvl+75.6;}}
+//--------------------------------------------------------------------------------------------------------------------------------------------------------//
+{// Blessings
+        BlessingMultiplictive=1+BlessingMultiplictive/100;
+//--------------------------------------------------------------------------------------------------------------------------------------------------------//
+        BlessingofDamagePercent=0.024*BlessingMultiplictive;
+        BlessingofDamageNumber=4.8*BlessingMultiplictive;
+        BlessingofStoneDamage=6;// BlessingMultiplictive den etkilenmez sabit.
+//--------------------------------------------------------------------------------------------------------------------------------------------------------//
+        BlessingofPowerPercent=1+BlessingofPowerlvl*BlessingofDamagePercent;
+        BlessingofTimePercent=1+(BlessingofPowerlvl+BlessingofTimelvl)*BlessingofDamagePercent;
+//--------------------------------------------------------------------------------------------------------------------------------------------------------//
+        BlessingofPowerNumber=BlessingofPowerlvl*BlessingofDamageNumber;
+//--------------------------------------------------------------------------------------------------------------------------------------------------------//
+        BlessingofStoneDamage=BlessingofStonelvl*BlessingofStoneDamage;}
+//--------------------------------------------------------------------------------------------------------------------------------------------------------//
+{// Additional
+       if (Type==1){
+        WeaponStrg*=CatacombB;    WeaponCritD*=CatacombB;
+        HelmetStrg*=CatacombB;    HelmetCritD*=CatacombB;
+        ChestPStrg*=CatacombB;    ChestPCritD*=CatacombB;
+        LeggingsStrg*=CatacombB;  LeggingsCritD*=CatacombB;
+        BootStrg*=CatacombB;      BootCritD*=CatacombB;
+
+        Weapondmg*=CatacombB;
+        Strg   =WeaponStrg +HelmetStrg +ChestPStrg +LeggingsStrg +BootStrg;
+        Critdmg=WeaponCritD+HelmetCritD+ChestPCritD+LeggingsCritD+BootCritD;
+
+        Strg   +=BaseStrg   +EDragPetS +GDragPetS;
+        Critdmg+=BaseCritdmg+EDragPetCC;
+
+        Strg   *=MasterSkull;
+
+        WeapondmgL=Weapondmg+BlessingofStoneDamage;
+        StrgL     =Strg     +BlessingofPowerNumber;
+        CritdmgL  =Critdmg  +BlessingofPowerNumber;
+
+        StrgL   *=BlessingofTimePercent;
+        CritdmgL*=BlessingofPowerPercent;
+        
+        StrgL   *=Legion;
+        CritdmgL*=Legion;}
+//--------------------------------------------------------------------------------------------------------------------------------------------------------//
+        if (Type==2){
+        Strg   =WeaponStrg +HelmetStrg +ChestPStrg +LeggingsStrg +BootStrg;
+        Critdmg=WeaponCritD+HelmetCritD+ChestPCritD+LeggingsCritD+BootCritD;
+        
+        WeapondmgL=Weapondmg;
+
+        Strg   +=BaseStrg   +EDragPetS +GDragPetS;
+        Critdmg+=BaseCritdmg+EDragPetCC;
+        
+        StrgL   =Strg   *Legion;
+        CritdmgL=Critdmg*Legion;}
+//--------------------------------------------------------------------------------------------------------------------------------------------------------//
+        StrgL   *=(1+EDragPetB);
+        CritdmgL*=(1+EDragPetB);}
+//--------------------------------------------------------------------------------------------------------------------------------------------------------//
+{// Dmg-DPS
+//--------------------------------------------------------------------------------------------------------------------------------------------------------//
+// Dmg Prepare
+        if(WeaponType==1){DmgMin=5+WeapondmgL+ArrowDmg;DmgMax=5+WeapondmgL+ArrowDmg;DPSMin=5+WeapondmgL+ArrowDmg;DPSMax=5+WeapondmgL+ArrowDmg;}
+        if(WeaponType==2){DmgMin=5+Weapondmg;          DmgMax=5+Weapondmg;          DPSMin=5+Weapondmg;          DPSMax=5+Weapondmg;}
+//--------------------------------------------------------------------------------------------------------------------------------------------------------//
+// DmgMin
+        DmgMin*=(1+(StrgL+Bestiary)/100)*(1+CritdmgL/100)*Enchants*(1+GDragPetB);
+        if (Type==1 && Class!=-1){
+        DmgMin*=CArrowD;}
+//--------------------------------------------------------------------------------------------------------------------------------------------------------//
+// DmgMax
+        DmgMax*=(1+(StrgL+Bestiary)/100)*(1+CritdmgL/100)*Enchants*(1+GDragPetB);
+        if (Type==1 && Class!=-1){
+        DmgMax*=CArrowD;}
+        DmgMax*=Overload;
+        DmgMax+=SouleatherD;
+//--------------------------------------------------------------------------------------------------------------------------------------------------------//
+// DPSMin
+        DPSMin*=(1+(StrgL+Bestiary)/100)*(1+CritdmgL/100)*Enchants*(1+GDragPetB);
+        if (Type==1 && Class!=-1){
+        DPSMin*=CArrowD;
+        DPSMin*=2;}
+        DPSMin*=AttackSpeed;
+//--------------------------------------------------------------------------------------------------------------------------------------------------------//
+// DPSMax
+        DPSMax*=(1+(StrgL+Bestiary)/100)*(1+CritdmgL/100)*Enchants*(1+GDragPetB);
+        if (Type==1 && Class!=-1){
+        DPSMax*=CArrowD;
+        DPSMax*=3;}
+        DPSMax*=Overload;
+        DPSMax*=AttackSpeed;}
+//--------------------------------------------------------------------------------------------------------------------------------------------------------//
+{// Print Dungeon
+if (Type==1){
+printf("------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+printf("Buffs");
+        printf("\t\t   CatacombB= %.2fx\n",CatacombB);   
+        printf("\t\t\t    Enchants= %.3fx\n",Enchants);       
+        printf("\t\t\t     CArrowD= %.3fx",CArrowD);        printf("\tBlessingofStrgPercent=  %.5fx\n",BlessingofTimePercent); 
+        printf("\t\t\t    CExtraAC= %.2fx",CExtraAC);       printf("\t BlessingofCritdmgPercent=  %.5fx\n",BlessingofPowerPercent);
+        printf("\t\t\t      Legion= %.4fx",Legion);         printf("\tBlessingofPowerNumber= +%.1f\n",BlessingofPowerNumber);
+        printf("\t\t\t    Overload= %.1fx",Overload);       printf("\t    BlessingofStoneDamage= +%.1f\n",BlessingofStoneDamage);
+        printf("\t\t\t AttackSpeed= %.3fx",AttackSpeed);    printf("\tBlessingMultiplictive=  %.2fx\n",BlessingMultiplictive);
+        printf("\t\t\t MasterSkull= %.2fx\n",MasterSkull);
+printf("------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+printf("Gear");
+        printf("\t\t  WeaponStrg= %.2f",WeaponStrg);        printf("\t\t\t  WeaponCritD= %.2f\n",WeaponCritD);
+        printf("\t\t\t  HelmetStrg= %.2f",HelmetStrg);      printf("\t\t\t  HelmetCritD= %.2f\n",HelmetCritD);        
+        printf("\t\t\t  ChestPStrg= %.2f",ChestPStrg);      printf("\t\t\t  ChestPCritD= %.2f\n",ChestPCritD);
+        printf("\t\t\tLeggingsStrg= %.2f",LeggingsStrg);    printf("\t\t\tLeggingsCritD= %.2f\n",LeggingsCritD);
+        printf("\t\t\t    BootStrg= %.2f",BootStrg);        printf("\t\t\t    BootCritD= %.2f\n",BootCritD);
+printf("------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+printf("\t\t\t           Start\t\t\t                Last\n");
+        printf("\t\t\t   Weapondmg= %.2f",Weapondmg);       printf("\t\t\t   WeapondmgL= %.2f\n",WeapondmgL);
+        printf("\t\t\t        Strg= %.2f",Strg);            printf("\t\t\t        StrgL= %.2f\n",StrgL);
+        printf("\t\t\t     Critdmg= %.2f",Critdmg);         printf("\t\t\t     CritdmgL= %.2f\n",CritdmgL);
+printf("------------------------------------------------------------------------------------------------------------------------------------------------------------\n");}}
+//--------------------------------------------------------------------------------------------------------------------------------------------------------//
+{// Print World
+if (Type==2){
+printf("------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+printf("Buffs");
+        printf("\t\t      Legion= %.4fx\n",Legion);
+        printf("\t\t\t    Overload= %.1fx\n",Overload);
+        printf("\t\t\t AttackSpeed= %.3fx\n",AttackSpeed);
+printf("------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+printf("Gear");
+        printf("\t\t  WeaponStrg= %.2f",WeaponStrg);        printf("\t\t\t  WeaponCritD= %.2f\n",WeaponCritD);
+        printf("\t\t\t  HelmetStrg= %.2f",HelmetStrg);      printf("\t\t\t  HelmetCritD= %.2f\n",HelmetCritD);        
+        printf("\t\t\t  ChestPStrg= %.2f",ChestPStrg);      printf("\t\t\t  ChestPCritD= %.2f\n",ChestPCritD);
+        printf("\t\t\tLeggingsStrg= %.2f",LeggingsStrg);    printf("\t\t\tLeggingsCritD= %.2f\n",LeggingsCritD);
+        printf("\t\t\t    BootStrg= %.2f",BootStrg);        printf("\t\t\t    BootCritD= %.2f\n",BootCritD);         
+printf("------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+printf("\t\t\t           Start\t\t\t                Last\n");
+        printf("\t\t\t   Weapondmg= %.2f",Weapondmg);       printf("\t\t\t   WeapondmgL= %.2f\n",WeapondmgL);
+        printf("\t\t\t        Strg= %.2f",Strg);            printf("\t\t\t        StrgL= %.2f\n",StrgL);
+        printf("\t\t\t     Critdmg= %.2f",Critdmg);         printf("\t\t\t     CritdmgL= %.2f\n",CritdmgL);
+printf("------------------------------------------------------------------------------------------------------------------------------------------------------------\n");}}
+//--------------------------------------------------------------------------------------------------------------------------------------------------------//
+{// Print
+{       {S=10000000000;printf("\t\t\t      DmgMin= "); 
+        while (S!=1){S=S/10;X=DmgMin/S;DmgMin-=X*S;
+        if ((S==100 || S==100000 || S==100000000) && Button==1){printf(".");}
+        if (X!=0){Button=1;}if (Button==1){printf("%d",X);}}Button=0;}
+//--------------------------------------------------------------------------------------------------------------------------------------------------------//
+        {S=10000000000;printf("\t\t\t      DmgMax= ");
+        while (S!=1){S=S/10;X=DmgMax/S;DmgMax-=X*S;
+        if ((S==100 || S==100000 || S==100000000) && Button==1){printf(".");}
+        if (X!=0){Button=1;}if (Button==1){printf("%d",X);}}printf("\n");Button=0;}
+//--------------------------------------------------------------------------------------------------------------------------------------------------------//
+        {S=10000000000;printf("\t\t\t      DPSMin= "); 
+        while (S!=1){S=S/10;X=DPSMin/S;DPSMin-=X*S;
+        if ((S==100 || S==100000 || S==100000000) && Button==1){printf(".");}
+        if (X!=0){Button=1;}if (Button==1){printf("%d",X);}}Button=0;}
+//--------------------------------------------------------------------------------------------------------------------------------------------------------//
+        {S=10000000000;printf("\t\t      DPSMax= "); 
+        while (S!=1){S=S/10;X=DPSMax/S;DPSMax-=X*S;
+        if ((S==100 || S==100000 || S==100000000) && Button==1){printf(".");}
+        if (X!=0){Button=1;}if (Button==1){printf("%d",X);}}printf("\n");Button=0;}}
+printf("------------------------------------------------------------------------------------------------------------------------------------------------------------\n");}
+    return 0;
+}
